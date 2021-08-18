@@ -1,3 +1,83 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 35px;
+}
+
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: antiquewhite;
+}
+
+.title {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+}
+
+.top-bar-buttons {
+  display: inline-block;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 30px;
+  text-decoration: none;
+  color: black;
+}
+
+.top-bar-buttons:hover {
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: bolder;
+}
+
+.authentication-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.authentication-buttons > p {
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: large;
+}
+
+.authentication-buttons > p:hover {
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: bolder;
+}
+
+.not-logged {
+  display: block;
+  width: 90%;
+  margin-top: 25vh;
   text-align: center;
+  font-size: 50px;
+}
+
+.signin {
+  margin-right: 10px;
+}
+
+.signin:hover {
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+
+.signup {
+  margin-left: 10px;
+}
+
+.signup:hover {
+  cursor: pointer;
+  font-weight: bolder;
 }
