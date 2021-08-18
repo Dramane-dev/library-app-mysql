@@ -14,6 +14,8 @@ module.exports = (app) => {
 
     app.post('/book', [verifyToken.verifyToken], BookController.createBook);
     
+    app.put('/book/:id', [verifyToken.verifyToken], BookController.updateBook);
+    
     app.delete('/book/:id', [verifyToken.verifyToken], BookController.deleteBook);
 }
 

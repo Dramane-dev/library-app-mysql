@@ -41,9 +41,38 @@ exports.createBook = (req, res) => {
      .catch(err => res.status(500).send({ message: err.message }));
 };
 
-exports.deleteBook = (req, res) => {
+exports.updateBook = (req, res) => {
     const id = req.params.id;
     const body = req.body;
+
+    Book.update(body, {
+        where: {
+            id: id
+        }
+    })
+     .then(book => {
+        if (book < 1) {
+            return res.status(404).send(error({
+                message: 'Cannot upadated book ❌ Verify this id. The value cannot be empty or same !'
+            }));
+        }
+
+        res.status(200).send({
+            message: 'Book updated successfuly ✅ !'
+        });
+     })
+     .catch(err => {
+        if (err) {
+            return res.status(404).send({
+                message: `The book with id ${id} cannot be upadated  ❌ ...`
+            });
+        }
+     });
+};
+
+
+exports.deleteBook = (req, res) => {
+    const id = req.params.id;
 
     Book.destroy({
         where: {
