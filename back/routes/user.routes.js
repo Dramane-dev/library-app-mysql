@@ -13,6 +13,8 @@ module.exports = (app) => {
     app.get('/books', [verifyToken.verifyToken], BookController.accessToAllBooks);
 
     app.post('/book', [verifyToken.verifyToken], BookController.createBook);
+    
+    app.delete('/book/:id', [verifyToken.verifyToken], BookController.deleteBook);
 }
 
 

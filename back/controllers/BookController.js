@@ -39,4 +39,33 @@ exports.createBook = (req, res) => {
          });
      })
      .catch(err => res.status(500).send({ message: err.message }));
-}
+};
+
+exports.deleteBook = (req, res) => {
+    const id = req.params.id;
+    const body = req.body;
+
+    Book.destroy({
+        where: {
+            id: id
+        }
+    })
+     .then(book => {
+        if (book < 1) {
+            res.status(404).send({
+                message: 'Cannot deleted task ❌ ! Verify this id. Maybe this task does not exist ?'
+            });
+        }
+
+        res.status(200).send({
+            message: 'Book deleted successfuly ✅ !'
+        });
+     })
+     .catch(err => {
+        if (err) {
+           return res.status(500).send({
+               message: err.message
+           });
+        }
+     });
+};
