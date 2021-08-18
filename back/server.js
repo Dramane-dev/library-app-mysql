@@ -18,8 +18,3 @@ app.listen(process.env.PORT, () => {
      .then(() => console.log('connected to mysql db successfuly ! ✅'))
      .catch(err => console.log('Impossible de se connecter à la base de données : ❌ ' + error ));
 });
-
-
-
-
-
