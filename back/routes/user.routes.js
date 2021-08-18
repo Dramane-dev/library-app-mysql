@@ -1,4 +1,4 @@
-const UserController = require('../controllers/UserController');
+const BookController = require('../controllers/BookController');
 const verifyToken = require('../middlewares/authentication');
 
 module.exports = (app) => {
@@ -10,7 +10,9 @@ module.exports = (app) => {
         next();
     });
 
-    app.get('/books', [verifyToken.verifyToken], UserController.allAccess);
+    app.get('/books', [verifyToken.verifyToken], BookController.accessToAllBooks);
+
+    app.post('/book', [verifyToken.verifyToken], BookController.createBook);
 }
 
 
