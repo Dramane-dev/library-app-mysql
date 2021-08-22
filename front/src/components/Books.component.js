@@ -25,12 +25,10 @@ export default class Books extends Component {
                 books: BookService.all()
             });
         }
-
-        console.log(this.state.books);
     }
 
     render() {
-        const { connected } = this.state;
+        const { connected, books } = this.state;
 
         return(
             <>
@@ -40,11 +38,11 @@ export default class Books extends Component {
                     <p>To have an access into the Library App</p>
                     <p>
                         <Link to={"/signin"}>
-                        <span id="signin" className="signin">Sign In</span>
+                            <span id="signin" className="signin">Sign In</span>
                         </Link>
                         or
                         <Link to={"/signup"}>
-                        <span id="signup" className="signup">Sign Up</span>  
+                            <span id="signup" className="signup">Sign Up</span>  
                         </Link>
                     </p>
                     </div>

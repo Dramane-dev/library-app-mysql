@@ -5,7 +5,7 @@ import { isEmail } from 'validator';
 
 import AuthenticationService from '../services/authentication.service';
 
-import '../css/Register.css';
+import '../css/form.css';
 
 const required = value => {
     if (!value) {
@@ -89,31 +89,32 @@ export default class Register extends Component {
             successful: false
         });
 
-
-        if (this.checkBtn.context._errors.length === 0) {
+        if (this.state.name !== '' && this.state.email !== '' && this.state.password !== '') {
             AuthenticationService.register(
                 this.state.name,
                 this.state.email,
                 this.state.password
-            )
-             .then(response => {
+            ).then(response => {
                 this.setState({
                     message: response.data.message,
                     successful: true
                 })
-             })
-             .catch(err => {
+             }).catch(err => {
                  const errMessage = 
                  (err.response && err.response.data && err.response.data.message) ||
                  err.message ||
                  err.toString();
-
+    
                  this.setState({
                      message: errMessage,
                      successful: false
                  })
              });
         }
+    }
+
+    cancel() {
+        return window.location.href = '/';
     }
 
     render() {
@@ -175,6 +176,7 @@ export default class Register extends Component {
                           name="cancel"
                           value="Cancel"
                           type="button"
+                          onClick={this.cancel}
                         />
                     </Form>
                 </div>

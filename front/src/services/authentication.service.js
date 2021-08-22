@@ -13,13 +13,15 @@ class AuthenticationService {
             if (response.data.accessToken) {
                 localStorage.setItem('user', JSON.stringify(response.data));
             }
-
-            return response.data;
+            return response;
+         }, error => {
+             return Promise.reject(error.response.status);
          })
     }
 
     logout() {
         localStorage.removeItem('user');
+        window.location.href = '/';
     }
 
     register(name, email, password) {
@@ -28,12 +30,6 @@ class AuthenticationService {
              name,
              email,
              password
-         })
-         .then(response => {
-             console.log(response);
-         })
-         .catch(err => {
-             console.log(err);
          });
     }
 
