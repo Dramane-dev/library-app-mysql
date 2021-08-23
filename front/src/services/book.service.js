@@ -6,9 +6,10 @@ const API_URL = 'http://localhost:3030/';
 class BookService {
     all() {
         return axios
-         .get(API_URL + 'Books', { headers: AuthenticationHeaderService() })
+         .get(API_URL + 'books', { headers: AuthenticationHeaderService() })
          .then(response => {
-            return response.data;
+             //console.log(response.data.data);
+            return response.data.data;
          });
     }
 
