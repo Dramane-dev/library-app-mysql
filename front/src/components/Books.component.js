@@ -35,10 +35,6 @@ export default class Books extends Component {
     render() {
         const { connected, books } = this.state;
         
-        for (let i = 0; i < books.length; i++) {
-            console.log(books[i].title);
-        }
-        
         return(
             <>
                 {!connected ? (
@@ -56,7 +52,22 @@ export default class Books extends Component {
                         </p>
                     </div>
                 ) : books.length > 0 ? (
-                    <h1>All Books</h1>
+                    <div id="books-container" className="books-container">
+                        {
+                            books.map((book, index) => (
+                                <div key={ index } className="book-card">
+                                    <h1>Title</h1>
+                                    <p>{ book.title }</p>
+                                    <h1>Author</h1>
+                                    <p>{ book.author }</p>
+                                    <h1>Pages</h1>
+                                    <p>{ book.pages }</p>
+                                    <h1>Read</h1>
+                                    <p>{ book.bookRead.toString() }</p>
+                                </div>
+                            ))
+                        }
+                    </div>
                 ) : (
                     <div className="no-books">
                         <h1>You don't have a books in your library...</h1>
