@@ -34,7 +34,7 @@ export default class Books extends Component {
 
     render() {
         const { connected, books } = this.state;
-        
+
         return(
             <>
                 {!connected ? (
@@ -56,6 +56,14 @@ export default class Books extends Component {
                         {
                             books.map((book, index) => (
                                 <div key={ index } className="book-card">
+                                    <div className="btns-container">
+                                        <div className="delete-book">
+                                            <span>X</span>
+                                        </div>
+                                        <div className="edit-book">
+                                            <span className="material-icons">edit</span>
+                                        </div>
+                                    </div>
                                     <h1>Title</h1>
                                     <p>{ book.title }</p>
                                     <h1>Author</h1>
