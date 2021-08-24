@@ -125,7 +125,7 @@ export default class Register extends Component {
     }
 
     render() {
-        const { message, successful } = this.state;
+        const { successful } = this.state;
 
         if (successful) {
             setTimeout(() => {
@@ -134,16 +134,7 @@ export default class Register extends Component {
                     <Books />
                 );
             }, 1000);
-        } /* else {
-            if (message === 404) {
-                return (
-                    <div id="form-title-container" className="form-title-container">
-                        <h1 id="form-title">Login error</h1>
-                        <a href="/signin">Please verify your email or password.</a>
-                    </div>
-                );
-            }
-        } */
+        }
 
         return (
             <>
