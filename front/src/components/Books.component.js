@@ -32,9 +32,13 @@ export default class Books extends Component {
         window.location.href = '/book';
     }
 
+    editBook() {
+
+    }
+
     render() {
         const { connected, books } = this.state;
-        
+
         return(
             <>
                 {!connected ? (
@@ -60,7 +64,9 @@ export default class Books extends Component {
                                         <div className="delete-book">
                                             <span>X</span>
                                         </div>
-                                        <div className="edit-book">
+                                        <div 
+                                         className="edit-book"
+                                         >
                                             <span className="material-icons">edit</span>
                                         </div>
                                     </div>

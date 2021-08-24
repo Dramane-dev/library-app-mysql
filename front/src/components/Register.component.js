@@ -100,9 +100,24 @@ export default class Register extends Component {
                     this.setState({
                         message: response.data.message,
                         successful: true
-                    })
-    
-                    window.location.href = '/signin';
+                    });
+                    
+                    store.addNotification({
+                        title: 'You\'re registration is successfuly ✅ !',
+                        message: ' ',
+                        type: 'success',
+                        insert: 'top',
+                        container: 'top-full',
+                        animationIn: ['animate__animated', 'animate__flipInX'],
+                        animationOut: ['animate__animated', 'animate__flipOutX'],
+                        dismiss: {
+                            duration: 3000
+                        }
+                    });
+
+                    setTimeout(() => {
+                        window.location.href = '/signin';
+                    }, 2000);
                 } else {
                     this.setState({
                         message: response.data.message,

@@ -8,11 +8,26 @@ class BookService {
         return axios
          .get(API_URL + 'books', { headers: AuthenticationHeaderService() })
          .then(response => {
-             //console.log(response.data.data);
             return response.data.data;
          });
     }
 
+    create(book) {
+        return axios
+         .post(
+            API_URL + 'book', 
+            { headers: AuthenticationHeaderService() },
+            { contentType: 'application/json' },
+            book
+         )
+         .then(response => {
+             console.log(response.data);
+         })
+    }
+
+    edit() {
+
+    }
 }
 
 export default new BookService();
