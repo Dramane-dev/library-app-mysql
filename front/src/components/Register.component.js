@@ -120,7 +120,7 @@ export default class Register extends Component {
                             animationIn: ['animate__animated', 'animate__flipInX'],
                             animationOut: ['animate__animated', 'animate__flipOutX'],
                             dismiss: {
-                                duration: 4000
+                                duration: 3000
                             }
                         });
                     } else {
@@ -133,7 +133,7 @@ export default class Register extends Component {
                             animationIn: ['animate__animated', 'animate__flipInX'],
                             animationOut: ['animate__animated', 'animate__flipOutX'],
                             dismiss: {
-                                duration: 4000
+                                duration: 3000
                             }
                         });
                     }
