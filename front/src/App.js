@@ -8,6 +8,7 @@ import ReactNotification from 'react-notifications-component';
 import Register from './components/Register.component';
 import Books from './components/Books.component';
 import Login from './components/Login.component';
+import EditBook from './components/EditBook.component';
 
 import AuthenticationService from './services/authentication.service';
 
@@ -60,7 +61,7 @@ class App extends Component {
             <Route exact path={["/", "/books"]} component={Books} />
             <Route exact path="/signin" component={Login} />
             <Route exact path="/signup" component={Register} />
-            {/* <Route exact path="/book" component={} /> */}
+            <Route exact path="/book" component={EditBook} />
         </Switch>
       </>
     );
