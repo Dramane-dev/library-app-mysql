@@ -73,7 +73,7 @@ export default class Register extends Component {
     handleLogin(e) {
         e.preventDefault();
 
-        const { email, password, message, successful } = this.state;
+        const { email, password } = this.state;
 
         if (email !== '' || password !== '') {
             AuthenticationService.login(
@@ -99,7 +99,7 @@ export default class Register extends Component {
     }
 
     render() {
-        const { message, successful, data } = this.state;
+        const { message, successful } = this.state;
 
         if (successful) {
             console.log(message);

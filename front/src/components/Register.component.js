@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
+import { store } from 'react-notifications-component';
 import { isEmail } from 'validator';
 
 import AuthenticationService from '../services/authentication.service';
@@ -95,15 +96,49 @@ export default class Register extends Component {
                 this.state.email,
                 this.state.password
             ).then(response => {
-                this.setState({
-                    message: response.data.message,
-                    successful: true
-                })
+                if (response.status !== 400) {
+                    this.setState({
+                        message: response.data.message,
+                        successful: true
+                    })
+    
+                    window.location.href = '/signin';
+                } else {
+                    this.setState({
+                        message: response.data.message,
+                        successful: false
+                    });
+
+                    if (this.state.message.includes('name')) {
+                        store.addNotification({
+                            title: `${ this.state.message }`,
+                            message: ' ',
+                            type: 'danger',
+                            insert: 'top',
+                            container: 'top-full',
+                            animationIn: ['animate__animated', 'animate__flipInX'],
+                            animationOut: ['animate__animated', 'animate__flipOutX'],
+                            dismiss: {
+                                duration: 5000
+                            }
+                        });
+                    } else {
+                        store.addNotification({
+                            title: `${ this.state.message }`,
+                            message: ' ',
+                            type: 'danger',
+                            insert: 'top',
+                            container: 'top-full',
+                            animationIn: ['animate__animated', 'animate__flipInX'],
+                            animationOut: ['animate__animated', 'animate__flipOutX'],
+                            dismiss: {
+                                duration: 5000
+                            }
+                        });
+                    }
+                }
              }).catch(err => {
-                 const errMessage = 
-                 (err.response && err.response.data && err.response.data.message) ||
-                 err.message ||
-                 err.toString();
+                 const errMessage = err.data;
     
                  this.setState({
                      message: errMessage,
@@ -146,6 +181,7 @@ export default class Register extends Component {
 
                         <label htmlFor="email">Email</label>
                         <Input 
+                          id="email"
                           type="text"
                           name="email"
                           placeholder="email"

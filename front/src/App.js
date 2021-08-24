@@ -4,6 +4,7 @@ import {
   Route, 
   Link 
 } from 'react-router-dom';
+import ReactNotification from 'react-notifications-component';
 import Register from './components/Register.component';
 import Books from './components/Books.component';
 import Login from './components/Login.component';
@@ -11,20 +12,13 @@ import Login from './components/Login.component';
 import AuthenticationService from './services/authentication.service';
 
 import './App.css';
-
-
+import 'react-notifications-component/dist/theme.css'
+import 'animate.css/animate.min.css';
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  logOut() {
-    console.log('Click logout !');
-  }
-
   render() {
     return (
       <>
+        <ReactNotification />
         {JSON.parse(localStorage.getItem('user')) ? 
           (
             <div className="top-bar">

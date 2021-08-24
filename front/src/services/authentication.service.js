@@ -30,7 +30,15 @@ class AuthenticationService {
              name,
              email,
              password
-         });
+         })
+         .then(response => {
+             return response;
+         }, error => {
+             return Promise.reject(error.response);
+         })
+         .catch(err => {
+            return err;
+         })
     }
 
     getCurrentUser() {
