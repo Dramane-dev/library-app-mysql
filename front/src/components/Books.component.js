@@ -19,7 +19,7 @@ export default class Books extends Component {
 
     async componentDidMount() {
         const user = AuthenticationService.getCurrentUser();
-        
+
         if (user) {
             this.setState({
                 connected: true,
@@ -34,7 +34,7 @@ export default class Books extends Component {
 
     render() {
         const { connected, books } = this.state;
-
+        
         return(
             <>
                 {!connected ? (

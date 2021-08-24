@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
-
+import { store } from 'react-notifications-component';
 import { isEmail } from 'validator';
 
 import Books from './Books.component';
@@ -82,13 +82,39 @@ export default class Register extends Component {
             ).then(response => {
                 this.setState({
                     successful: true,
-                    message: response.data.message,
+                    message: response.data,
                     data: response.data
                 });
+                if (this.state.message) {
+                    store.addNotification({
+                        title: 'You are connected successfuly ✅',
+                        message: ' ',
+                        type: 'success',
+                        insert: 'top',
+                        container: 'top-full',
+                        animationIn: ['animate__animated', 'animate__flipInX'],
+                        animationOut: ['animate__animated', 'animate__flipOutX'],
+                        dismiss: {
+                            duration: 2000
+                        }
+                    });
+                }
             }).catch(err => {
                 this.setState({
                     successful: false,
                     message: err
+                });
+                store.addNotification({
+                    title: 'Please verify your email or your password ...',
+                    message: ' ',
+                    type: 'danger',
+                    insert: 'top',
+                    container: 'top-full',
+                    animationIn: ['animate__animated', 'animate__bounceIn'],
+                    animationOut: ['animate__animated', 'animate__bounceOut'],
+                    dismiss: {
+                        duration: 3000
+                    }
                 });
             });
         }
@@ -102,20 +128,22 @@ export default class Register extends Component {
         const { message, successful } = this.state;
 
         if (successful) {
-            window.location.href = '/books'
-            return (
-                <Books />
-            );
-        } else {
+            setTimeout(() => {
+                window.location.href = '/books'
+                return (
+                    <Books />
+                );
+            }, 1000);
+        } /* else {
             if (message === 404) {
                 return (
                     <div id="form-title-container" className="form-title-container">
                         <h1 id="form-title">Login error</h1>
-                        <a href="/signin">Please check your email or password.</a>
+                        <a href="/signin">Please verify your email or password.</a>
                     </div>
                 );
             }
-        }
+        } */
 
         return (
             <>
