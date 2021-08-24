@@ -109,6 +109,7 @@ export default class Register extends Component {
                         successful: false
                     });
 
+                    // Target error message name or mail already used
                     if (this.state.message.includes('name')) {
                         store.addNotification({
                             title: `${ this.state.message }`,
