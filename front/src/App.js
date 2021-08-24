@@ -45,9 +45,6 @@ class App extends Component {
                 <Link to={"/books"}>
                   <h1 className="title">Library App 📓</h1>
                 </Link>
-                <Link to={"/book"}>
-                  <p id="add-new-book" className="top-bar-buttons">Add new book</p>
-                </Link>
                 <div className="authentication-buttons">
                   <Link to={"/signin"}>
                     <p id="signin" className="top-bar-buttons signin">Sign In</p>

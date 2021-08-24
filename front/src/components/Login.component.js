@@ -102,8 +102,6 @@ export default class Register extends Component {
         const { message, successful } = this.state;
 
         if (successful) {
-            console.log(message);
-
             window.location.href = '/books'
             return (
                 <Books />
