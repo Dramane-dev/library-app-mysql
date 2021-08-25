@@ -12,6 +12,8 @@ module.exports = (app) => {
 
     app.get('/books', [verifyToken.verifyToken], BookController.accessToAllBooks);
 
+    app.get('/book/:id', [verifyToken.verifyToken], BookController.getBookById);
+
     app.post('/book', [verifyToken.verifyToken], BookController.createBook);
     
     app.put('/book/:id', [verifyToken.verifyToken], BookController.updateBook);

@@ -8,12 +8,29 @@ exports.accessToAllBooks = (req, res) => {
             data: book
         });
      })
-     .catch(err => {
+     .catch(() => {
          return res.status(404).send({
              message: 'No book in database ...'
          });
      });
 };
+
+exports.getBookById = (req, res) => {
+    const id = req.params.id;
+
+    Book.findByPk(id)
+     .then(book => {
+        res.status(200).send({
+            message: 'Book find successfuly ✅ !',
+            data: book
+        })
+     })
+     .catch(() => {
+         return res.status(404).send({
+             message: 'Book not found ❌'
+         })
+     });
+}
 
 exports.createBook = (req, res) => {
     const body = req.body;
