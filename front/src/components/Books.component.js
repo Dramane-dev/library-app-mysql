@@ -32,8 +32,12 @@ export default class Books extends Component {
         window.location.href = '/book';
     }
 
-    editBook() {
+    async editBook(key) {
         console.log('edit book');
+        console.log(key);
+        let bookData = await BookService.edit()
+
+        {/* <EditForm title={} /> */}
     }
 
     deleteBook() {
@@ -67,7 +71,7 @@ export default class Books extends Component {
                                     <div className="btns-container">
                                         <div 
                                          className="delete-book"
-                                         onClick={this.deleteBook}
+                                         onClick={ this.deleteBook }
                                         >
                                             <span>X</span>
                                         </div>
@@ -76,7 +80,7 @@ export default class Books extends Component {
                                          >
                                             <span 
                                              className="material-icons"
-                                             onClick={this.editBook}
+                                             onClick={ () => { this.editBook(index) } }
                                             >
                                              edit
                                             </span>
@@ -109,4 +113,13 @@ export default class Books extends Component {
             </>
         );
     }
+}
+
+function EditForm(props) {
+    return (
+        <>
+            <h1>My Edit Form</h1>
+            <p>{ props.title }</p>
+        </>
+    )
 }

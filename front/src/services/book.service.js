@@ -26,8 +26,18 @@ class BookService {
          });
     }
 
-    edit() {
-
+    edit(id, title, author, pages, read) {
+        return axios
+         .put(API_URL + 'book/' + id, {
+             title,
+             author,
+             pages,
+             read
+         },
+         { headers: AuthenticationHeaderService() }
+         ).then(response => {
+             return response;
+         });
     }
 }
 

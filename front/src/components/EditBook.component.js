@@ -205,8 +205,3 @@ export default class EditBook extends Component {
 }
 
 
-
-
-
-
-
