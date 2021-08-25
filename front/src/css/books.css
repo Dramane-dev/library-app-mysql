@@ -107,3 +107,85 @@
 .edit-book:hover {
     background-color: antiquewhite;
 }
+
+
+@media only screen and (min-device-width: 280px) and (max-device-width: 653px) {
+    .top-bar > p, h1 {
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: large;
+    }
+
+    .book-card {
+        width: 100%;
+    }
+
+    .no-books {
+        width: 90%;
+        margin-top: 25vh;
+    }
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 640px) {
+    .book-card {
+        width: 100%;
+    }
+
+    .no-books {
+        width: 90%;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+    .book-card {
+        width: 100%;
+    }
+
+    .no-books {
+        width: 90%;
+    }
+}
+
+@media only screen and (min-device-width: 540px) and (max-device-width: 720px) {
+    .no-books {
+        margin-top: 30vh;
+    }
+
+    .no-books > p {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .book-card {
+        width: 30%;
+    }
+
+    .no-books {
+        margin-top: 30vh;
+        width: 80%;
+    }
+
+    .no-books > h1 {
+        font-size: 70px;
+    }
+
+    .no-books > p {
+        font-size: 40px;
+    }
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+    .no-books {
+        margin-top: 30vh;
+        width: 80%;
+    }
+
+    .no-books > h1 {
+        font-size: 70px;
+    }
+
+    .no-books > p {
+        font-size: 40px;
+    }
+}
