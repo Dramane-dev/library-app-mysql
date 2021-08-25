@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
+import { store } from 'react-notifications-component';
 
 import BookService from '../services/book.service';
 
@@ -82,8 +83,23 @@ export default class EditBook extends Component {
                  });
 
                  if (this.state.message.includes('successfuly')) {
-                    // notification
+                    store.addNotification({
+                        title: 'You\'re book added successfuly ✅',
+                        message: ' ',
+                        type: 'success',
+                        insert: 'top',
+                        container: 'top-full',
+                        animationIn: ['animate__animated', 'animate__jackInTheBox'],
+                        animationOut: ['animate__animated', 'animate__jackInTheBox'],
+                        dismiss: {
+                            duration: 2000
+                        }
+                    })
                  }
+
+                 setTimeout(() => {
+                    window.location.href = '/books';
+                 }, 1500);
              })
              .catch(err => {
                  this.setState({
@@ -92,8 +108,23 @@ export default class EditBook extends Component {
                  });
                 
                  if (this.state.message === 403) {
-                    // notification 
+                    store.addNotification({
+                        title: `Error ${ this.state.message } Not token provided ...`,
+                        message: ' ',
+                        type: 'danger',
+                        insert: 'top',
+                        container: 'top-full',
+                        animationIn: ['animate__animated', 'animate__jackInTheBox'],
+                        animationOut: ['animate__animated', 'animate__jackInTheBox'],
+                        dismiss: {
+                            duration: 2000
+                        }
+                    });
                  }
+
+                 setTimeout(() => {
+                    window.location.href = '/books';
+                 }, 1500);
              });
         }
     }

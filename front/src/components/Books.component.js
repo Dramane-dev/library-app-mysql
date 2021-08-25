@@ -33,7 +33,11 @@ export default class Books extends Component {
     }
 
     editBook() {
+        console.log('edit book');
+    }
 
+    deleteBook() {
+        console.log('delete book');
     }
 
     render() {
@@ -61,13 +65,21 @@ export default class Books extends Component {
                             books.map((book, index) => (
                                 <div key={ index } className="book-card">
                                     <div className="btns-container">
-                                        <div className="delete-book">
+                                        <div 
+                                         className="delete-book"
+                                         onClick={this.deleteBook}
+                                        >
                                             <span>X</span>
                                         </div>
                                         <div 
                                          className="edit-book"
                                          >
-                                            <span className="material-icons">edit</span>
+                                            <span 
+                                             className="material-icons"
+                                             onClick={this.editBook}
+                                            >
+                                             edit
+                                            </span>
                                         </div>
                                     </div>
                                     <h1>Title</h1>
