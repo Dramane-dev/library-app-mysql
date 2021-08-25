@@ -38,6 +38,20 @@ h1 {
   font-weight: bolder;
 }
 
+.menu-items-buttons {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 15px;
+  text-decoration: none;
+  color: black;
+}
+
+.menu-items-buttons:hover {
+  font-weight: bolder;
+}
+
+
+
 .authentication-buttons {
   display: flex;
   flex-direction: row;
