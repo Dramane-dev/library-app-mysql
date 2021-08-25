@@ -12,17 +12,18 @@ class BookService {
          });
     }
 
-    create(book) {
+    create(title, author, pages, read) {
         return axios
-         .post(
-            API_URL + 'book', 
-            { headers: AuthenticationHeaderService() },
-            { contentType: 'application/json' },
-            book
-         )
-         .then(response => {
-             console.log(response.data);
-         })
+         .post(API_URL + 'book', {
+                title,
+                author,
+                pages,
+                read
+            },
+            { headers: AuthenticationHeaderService() }
+            ).then(response => {
+             return response;
+         });
     }
 
     edit() {
