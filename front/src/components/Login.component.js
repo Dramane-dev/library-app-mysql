@@ -139,7 +139,7 @@ export default class Register extends Component {
         return (
             <>
                 <div id="form-title-container" className="form-title-container">
-                    <h1 id="form-title">Login</h1>
+                    <h1 id="form-title">Sign in</h1>
                 </div>
 
                 <div className="form-container">

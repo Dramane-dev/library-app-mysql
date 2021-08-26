@@ -7,6 +7,16 @@ import AuthenticationService from '../services/authentication.service';
 import BookService from '../services/book.service';
 
 import '../css/books.css';
+
+function EditForm(props) {
+    return (
+        <>
+            <h1>My Edit Form</h1>
+            <p>{ props.book.title }</p>
+        </>
+    )
+}
+
 export default class Books extends Component {
     constructor(props) {
         super(props);
@@ -33,11 +43,12 @@ export default class Books extends Component {
     }
 
     async editBook(key) {
-        console.log('edit book');
-        console.log(key);
-        let bookData = await BookService.edit()
+        let bookData = await BookService.getById(key);
+        console.log(bookData);
 
-        {/* <EditForm title={} /> */}
+        return (
+            <EditForm book={bookData} />
+        );
     }
 
     deleteBook() {
@@ -66,8 +77,8 @@ export default class Books extends Component {
                 ) : books.length > 0 ? (
                     <div id="books-container" className="books-container">
                         {
-                            books.map((book, index) => (
-                                <div key={ index } className="book-card">
+                            books.map((book) => (
+                                <div key={ book.id } className="book-card">
                                     <div className="btns-container">
                                         <div 
                                          className="delete-book"
@@ -80,7 +91,7 @@ export default class Books extends Component {
                                          >
                                             <span 
                                              className="material-icons"
-                                             onClick={ () => { this.editBook(index) } }
+                                             onClick={ () => { this.editBook(book.id) } }
                                             >
                                              edit
                                             </span>
@@ -113,13 +124,4 @@ export default class Books extends Component {
             </>
         );
     }
-}
-
-function EditForm(props) {
-    return (
-        <>
-            <h1>My Edit Form</h1>
-            <p>{ props.title }</p>
-        </>
-    )
 }

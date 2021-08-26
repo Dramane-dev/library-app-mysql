@@ -12,6 +12,14 @@ class BookService {
          });
     }
 
+    getById(id) {
+        return axios
+         .get(API_URL + 'book/' + id, { headers: AuthenticationHeaderService() })
+         .then(response => {
+             return response.data.data;
+         });
+    }
+
     create(title, author, pages, read) {
         return axios
          .post(API_URL + 'book', {
