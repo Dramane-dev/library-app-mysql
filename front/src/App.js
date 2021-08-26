@@ -21,6 +21,25 @@ import AuthenticationService from './services/authentication.service';
 import './App.css';
 import 'react-notifications-component/dist/theme.css'
 import 'animate.css/animate.min.css';
+
+function Copyright() {
+  let redirectToMyGithubPage = () => {
+    window.location.href = 'https://github.com/Dramane-dev';
+  }
+
+  return (
+    <p 
+     className="footer-content" 
+     onClick={() => { redirectToMyGithubPage() }}
+    >
+      { 'Dramane Dev - ' }
+      { 'Copyright © ' }
+      { new Date().getFullYear() }
+      {'.'}
+    </p>
+  );
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -62,143 +81,150 @@ class App extends Component {
 
     return (
       <>
-        <ReactNotification />
-        {JSON.parse(localStorage.getItem('user')) ? 
-          (
-            <div className="top-bar">
-              <Link to={"/books"}>
-                <h1 className="title">Library App 📓</h1>
-              </Link>
-              { window.screen.width >= 280 && window.screen.height <= 812 ? (
-                  <>
-                    <IconButton
-                    aria-label="more"
-                    aria-controls="long-menu"
-                    aria-haspopup="true"
-                    onClick={this.handleOpenMenu}
-                    >
-                      <MoreVertIcon />
-                    </IconButton>
+       <div className="page-container">
+        <div className="content">
+          <ReactNotification />
+          {JSON.parse(localStorage.getItem('user')) ? 
+            (
+              <div className="top-bar">
+                <Link to={"/books"}>
+                  <h1 className="title">Library App 📓</h1>
+                </Link>
+                { window.screen.width >= 280 && window.screen.height <= 812 ? (
+                    <>
+                      <IconButton
+                      aria-label="more"
+                      aria-controls="long-menu"
+                      aria-haspopup="true"
+                      onClick={this.handleOpenMenu}
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
 
-                    <Menu
-                     id="simple-menu"
-                     anchorEl={this.state.anchorEl}
-                     keepMounted
-                     open={ open }
-                     close={ this.handleCloseMenu.toString() }
-                     TransitionComponent={Fade}
-                    >
-                      <MenuItem 
+                      <Menu
+                      id="simple-menu"
+                      anchorEl={this.state.anchorEl}
+                      keepMounted
+                      open={ open }
+                      close={ this.handleCloseMenu.toString() }
+                      TransitionComponent={Fade}
+                      >
+                        <MenuItem 
+                          onClick={ this.handleCloseMenu }
+                        >
+                        <p 
+                          className="menu-items-buttons"
+                          onClick={ this.redirectToAddNewBook }
+                          >
+                            Add new book
+                          </p>
+                        </MenuItem>
+                      
+                        <MenuItem 
                         onClick={ this.handleCloseMenu }
-                      >
-                       <p 
-                        className="menu-items-buttons"
-                        onClick={ this.redirectToAddNewBook }
                         >
-                          Add new book
+                          <p
+                          className="menu-items-buttons" 
+                          onClick={AuthenticationService.logout}
+                          >
+                            Log out
+                          </p>
+                        </MenuItem>
+                      </Menu>
+                    </>
+                  ) : (
+                    <>
+                      <Link to={"/book"}>
+                      <p id="add-new-book" className="top-bar-buttons">Add new book</p>
+                    </Link>
+                    <div className="authentication-buttons">
+                      <Link to={"/"}>
+                        <p 
+                          id="logout" 
+                          className="top-bar-buttons logout" 
+                          onClick={AuthenticationService.logout}
+                          >
+                            Log out
                         </p>
-                      </MenuItem>
-                    
-                      <MenuItem 
-                       onClick={ this.handleCloseMenu }
-                      >
-                        <p
-                         className="menu-items-buttons" 
-                         onClick={AuthenticationService.logout}
-                        >
-                          Log out
-                        </p>
-                      </MenuItem>
-                    </Menu>
-                  </>
-                ) : (
-                  <>
-                    <Link to={"/book"}>
-                     <p id="add-new-book" className="top-bar-buttons">Add new book</p>
-                   </Link>
-                   <div className="authentication-buttons">
-                     <Link to={"/"}>
-                       <p 
-                         id="logout" 
-                         className="top-bar-buttons logout" 
-                         onClick={AuthenticationService.logout}
-                         >
-                           Log out
-                       </p>
-                     </Link>
-                   </div>
-                  </>
-                )
-              }
-            </div>
-          ) : window.screen.width >= 280 && window.screen.height <= 812 ? (
-            <div className="top-bar">
-              <Link to={"/books"}>
-                <h1 className="title">Library App 📓</h1>
-              </Link>
-
-              <IconButton
-                aria-label="more"
-                aria-controls="long-menu"
-                aria-haspopup="true"
-                onClick={this.handleOpenMenu}
-                >
-                  <MoreVertIcon />
-                </IconButton>
-
-                <Menu
-                 id="simple-menu"
-                 anchorEl={this.state.anchorEl}
-                 keepMounted
-                 open={ open }
-                 close={ this.handleCloseMenu.toString() }
-                 TransitionComponent={Fade}
-                >
-                  <MenuItem 
-                    onClick={ this.handleCloseMenu }
-                  >
-                   <p 
-                    className="menu-items-buttons"
-                    onClick={ this.redirectToSignIn }
-                    >
-                      Sign In
-                    </p>
-                  </MenuItem>
-                
-                  <MenuItem 
-                   onClick={ this.handleCloseMenu }
-                  >
-                    <p
-                     className="menu-items-buttons" 
-                     onClick={ this.redirectToSignUp }
-                    >
-                      Sign Up
-                    </p>
-                  </MenuItem>
-                </Menu>
-            </div>
-          ) : (
-            <div className="top-bar">
-              <Link to={"/books"}>
-                <h1 className="title">Library App 📓</h1>
-              </Link>
-              <div className="authentication-buttons">
-                <Link to={"/signin"}>
-                  <p id="signin" className="top-bar-buttons signin">Sign In</p>
-                </Link>
-                <Link to={"/signup"}>
-                  <p id="signup" className="top-bar-buttons signup">Sign Up</p>
-                </Link>
+                      </Link>
+                    </div>
+                    </>
+                  )
+                }
               </div>
-            </div>
-          )
-        }
-        <Switch>
-            <Route exact path={["/", "/books"]} component={Books} />
-            <Route exact path="/signin" component={Login} />
-            <Route exact path="/signup" component={Register} />
-            <Route exact path="/book" component={EditBook} />
-        </Switch>
+            ) : window.screen.width >= 280 && window.screen.height <= 812 ? (
+              <div className="top-bar">
+                <Link to={"/books"}>
+                  <h1 className="title">Library App 📓</h1>
+                </Link>
+
+                <IconButton
+                  aria-label="more"
+                  aria-controls="long-menu"
+                  aria-haspopup="true"
+                  onClick={this.handleOpenMenu}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+
+                  <Menu
+                  id="simple-menu"
+                  anchorEl={this.state.anchorEl}
+                  keepMounted
+                  open={ open }
+                  close={ this.handleCloseMenu.toString() }
+                  TransitionComponent={Fade}
+                  >
+                    <MenuItem 
+                      onClick={ this.handleCloseMenu }
+                    >
+                    <p 
+                      className="menu-items-buttons"
+                      onClick={ this.redirectToSignIn }
+                      >
+                        Sign In
+                      </p>
+                    </MenuItem>
+                  
+                    <MenuItem 
+                    onClick={ this.handleCloseMenu }
+                    >
+                      <p
+                      className="menu-items-buttons" 
+                      onClick={ this.redirectToSignUp }
+                      >
+                        Sign Up
+                      </p>
+                    </MenuItem>
+                  </Menu>
+              </div>
+            ) : (
+              <div className="top-bar">
+                <Link to={"/books"}>
+                  <h1 className="title">Library App 📓</h1>
+                </Link>
+                <div className="authentication-buttons">
+                  <Link to={"/signin"}>
+                    <p id="signin" className="top-bar-buttons signin">Sign In</p>
+                  </Link>
+                  <Link to={"/signup"}>
+                    <p id="signup" className="top-bar-buttons signup">Sign Up</p>
+                  </Link>
+                </div>
+              </div>
+            )
+          }
+          <Switch>
+              <Route exact path={["/", "/books"]} component={Books} />
+              <Route exact path="/signin" component={Login} />
+              <Route exact path="/signup" component={Register} />
+              <Route exact path="/book" component={EditBook} />
+          </Switch>
+        </div>
+          <footer className="footer">
+            <Copyright />
+          </footer>
+       </div>
       </>
     );
   }
