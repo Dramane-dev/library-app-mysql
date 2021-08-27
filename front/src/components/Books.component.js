@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {
     Link 
-  } from 'react-router-dom';
+} from 'react-router-dom';
 
+import EditBook from './EditBook.component';
 import AuthenticationService from '../services/authentication.service';
 import BookService from '../services/book.service';
 
@@ -45,10 +46,8 @@ export default class Books extends Component {
     async editBook(key) {
         let bookData = await BookService.getById(key);
         console.log(bookData);
-
-        return (
-            <EditForm book={bookData} />
-        );
+        window.location.href = '/book/'+ key;
+        console.log(window.location.href)
     }
 
     deleteBook() {

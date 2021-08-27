@@ -37,6 +37,10 @@ export default class EditBook extends Component {
         };
     }
 
+    componentDidMount() {
+        console.log(this.props);
+    }
+
     onChangeTitle(e) {
         this.setState({
             title: e.target.value
