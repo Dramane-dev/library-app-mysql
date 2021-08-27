@@ -3,7 +3,6 @@ import {
     Link 
 } from 'react-router-dom';
 
-import EditBook from './EditBook.component';
 import AuthenticationService from '../services/authentication.service';
 import BookService from '../services/book.service';
 
@@ -47,7 +46,6 @@ export default class Books extends Component {
         let bookData = await BookService.getById(key);
         console.log(bookData);
         window.location.href = '/book/'+ key;
-        console.log(window.location.href)
     }
 
     deleteBook() {

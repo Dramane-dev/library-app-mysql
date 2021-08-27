@@ -9,7 +9,7 @@ import NavBar from './components/NavBar.component';
 import Register from './components/Register.component';
 import Books from './components/Books.component';
 import Login from './components/Login.component';
-import EditBook from './components/EditBook.component';
+import BookForm from './components/BookForm.component';
 import Copyright from './components/Copyright.component';
 
 import './App.css';
@@ -28,7 +28,7 @@ class App extends Component {
               <Route exact path={["/", "/books"]} component={Books} />
               <Route exact path="/signin" component={Login} />
               <Route exact path="/signup" component={Register} />
-              <Route exact path="/book" component={EditBook} />
+              <Route exact path="/book" component={BookForm} />
           </Switch>
         </div>
         <Copyright /> 
