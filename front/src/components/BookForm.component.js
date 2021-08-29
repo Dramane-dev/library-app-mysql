@@ -26,19 +26,16 @@ export default class EditBook extends Component {
         this.onChangePages = this.onChangePages.bind(this);
         this.onChangeRead = this.onChangeRead.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
         
         this.state = {
-            title: '',
-            author: '',
-            pages: '',
-            read: false,
+            title: this.props.book ? this.props.book.title : '',
+            author: this.props.book ? this.props.book.author : '',
+            pages: this.props.book ? this.props.book.pages : '',
+            read: this.props.book ? this.props.book.bookRead : false,
             successful: false,
             message: ''
         };
-    }
-
-    componentDidMount() {
-        console.log(this.props);
     }
 
     onChangeTitle(e) {
@@ -133,6 +130,74 @@ export default class EditBook extends Component {
         }
     }
 
+    handleEdit(e) {
+        e.preventDefault();
+
+        if (
+            this.state.title !== '' &&
+            this.state.author !== '' &&
+            this.state.pages !== '' &&
+            this.state.read !== ''
+        ) {
+            BookService.edit(
+                this.props.book.id,
+                this.state.title,
+                this.state.author,
+                this.state.pages,
+                this.state.read
+            ).then(response => {
+                 this.setState({
+                    successful: true,
+                    message: response.data.message
+                 });
+
+                 if (this.state.message.includes('successfuly')) {
+                    store.addNotification({
+                        title: 'You\'re book added successfuly ✅',
+                        message: ' ',
+                        type: 'success',
+                        insert: 'top',
+                        container: 'top-full',
+                        animationIn: ['animate__animated', 'animate__jackInTheBox'],
+                        animationOut: ['animate__animated', 'animate__jackInTheBox'],
+                        dismiss: {
+                            duration: 2000
+                        }
+                    });
+                 }
+
+                 setTimeout(() => {
+                    window.location.href = '/books';
+                 }, 1500);
+             })
+             .catch(err => {
+                 this.setState({
+                     successful: false,
+                     message: err.response.status
+                 });
+                
+                 if (this.state.message === 403) {
+                    store.addNotification({
+                        title: `Error ${ this.state.message } Not token provided ...`,
+                        message: ' ',
+                        type: 'danger',
+                        insert: 'top',
+                        container: 'top-full',
+                        animationIn: ['animate__animated', 'animate__jackInTheBox'],
+                        animationOut: ['animate__animated', 'animate__jackInTheBox'],
+                        dismiss: {
+                            duration: 2000
+                        }
+                    });
+                 }
+
+                 setTimeout(() => {
+                    window.location.href = '/books';
+                 }, 1500);
+             });
+        }
+    }
+
     cancel() {
         window.location.href = '/books'
     }
@@ -140,70 +205,69 @@ export default class EditBook extends Component {
     render() {
         return (
             <>
-                <div className="form-title-container">
-                    <h3>Add a new book</h3>
-                </div>
-
-                <div className="form-container">
-                    <Form
+               <div className="form-title-container">
+                   <h3>{ this.props.book ? 'Edit a book' : 'Add a new book' }</h3>
+               </div>
+               <div className="form-container">
+                   <Form
                      className="form-book"
-                     onSubmit={this.handleSubmit}
+                     onSubmit={ this.props.book ? this.handleEdit : this.handleSubmit }
                     >
-                        <label htmlFor="title">Title</label>
-                        <Input 
+                       <label htmlFor="title">Title</label>
+                       <Input 
                          type="text"
                          name="title"
                          placeholder="Title of book"
-                         value={this.state.title}
-                         onChange={this.onChangeTitle}
-                         validations={[required]}
-                        />
+                         value={ this.props.book ? this.props.book.title : this.state.title }
+                         onChange={ this.onChangeTitle }
+                         validations={[ required ]}
+                       />
 
-                        <label htmlFor="author">Author</label>
-                        <Input 
+                       <label htmlFor="author">Author</label>
+                       <Input 
                          type="text"
                          name="author"
                          placeholder="Author"
-                         value={this.state.author}
-                         onChange={this.onChangeAuthor}
-                         validations={[required]}
-                        />
+                         value={ this.props.book ? this.props.book.author : this.state.author }
+                         onChange={ this.onChangeAuthor }
+                         validations={[ required ]}
+                       />
 
-                        <label htmlFor="pages">Pages</label>
-                        <Input 
+                       <label htmlFor="pages">Pages</label>
+                       <Input 
                          type="text"
                          name="pages"
                          placeholder="Number of pages"
-                         value={this.state.pages}
-                         onChange={this.onChangePages}
-                         validations={[required]}
-                        />
+                         value={ this.props.book ? this.props.book.pages : this.state.pages}
+                         onChange={ this.onChangePages }
+                         validations={[ required ]}
+                       />
 
-                        <label htmlFor="read">Have you read it in entire ?</label>
-                        <Input 
+                       <label htmlFor="read">Have you read it in entire ?</label>
+                       <Input 
                          type="checkbox"
                          name="read"
-                         value={this.state.read}
-                         onChange={this.onChangeRead}
-                        />
+                         checked={ this.props.book ? this.props.book.bookRead : this.state.read }
+                         onChange={ this.onChangeRead }
+                       />
 
-                        <Input
-                        className="submit" 
+                       <Input
+                         className="submit" 
                          type="submit"
                          name="submit"
                          value="Submit"
-                        />
+                       />
 
-                        <Input 
-                          className="cancel"
-                          type="button"
-                          name="cancel"
-                          value="Cancel"
-                          onClick={this.cancel}
-                        />
-                    </Form>
-                </div>
-            </>
+                       <Input 
+                         className="cancel"
+                         type="button"
+                         name="cancel"
+                         value="Cancel"
+                         onClick={ this.cancel }
+                       />
+                   </Form>
+               </div>
+           </>
         );
     }
 }

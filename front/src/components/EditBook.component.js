@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
+import BookForm from './BookForm.component';
 
 import BookService from '../services/book.service';
 
-export default class EditBook extends Component {
-    constructor(props) {
-        super(props);
+function EditBook() {
+    const { id } = useParams();
+    const [book, setBook] = useState([]);
 
-        this.state = {
-            title: '',
-            author: '',
-            pages: '',
-            read: ''
-        };
+    window.onload = async () => {
+        await BookService.getById(parseInt(id)).then(response => {
+            setBook(response);
+        }).catch(err => console.log(err));
     }
 
-    componentDidMount() {
-        
-    }
+    const edit = book ? true : false;
 
-    render() {
-        return (
-            <h1>My Edit Form Component !</h1>
-        );
-    }
+    return (
+        <>  
+            <BookForm id={ id } book={ book } edit={ edit } />
+        </>
+    );
 }
+
+export default EditBook;

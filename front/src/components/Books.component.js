@@ -2,20 +2,12 @@ import React, { Component } from 'react';
 import {
     Link 
 } from 'react-router-dom';
+import { store } from 'react-notifications-component';
 
 import AuthenticationService from '../services/authentication.service';
 import BookService from '../services/book.service';
 
 import '../css/books.css';
-
-function EditForm(props) {
-    return (
-        <>
-            <h1>My Edit Form</h1>
-            <p>{ props.book.title }</p>
-        </>
-    )
-}
 
 export default class Books extends Component {
     constructor(props) {
@@ -42,14 +34,44 @@ export default class Books extends Component {
         window.location.href = '/book';
     }
 
-    async editBook(key) {
-        let bookData = await BookService.getById(key);
-        console.log(bookData);
+    editBook(key) {
         window.location.href = '/book/'+ key;
     }
 
-    deleteBook() {
-        console.log('delete book');
+    deleteBook(key) {
+        BookService.delete(key)
+         .then(response => {
+            store.addNotification({
+                title: response.data.message,
+                message: ' ',
+                type: 'success',
+                insert: 'top',
+                container: 'top-full',
+                animationIn: ['animate__animated', 'animate__jackInTheBox'],
+                animationOut: ['animate__animated', 'animate__jackInTheBox'],
+                dismiss: {
+                    duration: 2000
+                }
+            });
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+         })
+         .catch(err => {
+            store.addNotification({
+                title: err.data.message,
+                message: ' ',
+                type: 'danger',
+                insert: 'top',
+                container: 'top-full',
+                animationIn: ['animate__animated', 'animate__jackInTheBox'],
+                animationOut: ['animate__animated', 'animate__jackInTheBox'],
+                dismiss: {
+                    duration: 2000
+                }
+            });
+         })
     }
 
     render() {
@@ -79,7 +101,7 @@ export default class Books extends Component {
                                     <div className="btns-container">
                                         <div 
                                          className="delete-book"
-                                         onClick={ this.deleteBook }
+                                         onClick={ () => { this.deleteBook(book.id) } }
                                         >
                                             <span>X</span>
                                         </div>
@@ -101,7 +123,7 @@ export default class Books extends Component {
                                     <h1>Pages</h1>
                                     <p>{ book.pages }</p>
                                     <h1>Read</h1>
-                                    <p>{ book.bookRead.toString() }</p>
+                                    <p>{ book.bookRead === String(1) ? 'True' : 'False' }</p>
                                 </div>
                             ))
                         }

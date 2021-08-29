@@ -14,7 +14,7 @@ class BookService {
 
     getById(id) {
         return axios
-         .get(API_URL + 'book/' + id, { headers: AuthenticationHeaderService() })
+         .get(API_URL + 'book/' + parseInt(id), { headers: AuthenticationHeaderService() })
          .then(response => {
              return response.data.data;
          });
@@ -45,6 +45,15 @@ class BookService {
          { headers: AuthenticationHeaderService() }
          ).then(response => {
              return response;
+         });
+    }
+
+    delete(id) {
+        return axios
+         .delete(API_URL + 'book/' + id, 
+         { headers: AuthenticationHeaderService() }
+         ).then(response => {
+             return response
          });
     }
 }

@@ -10,6 +10,7 @@ import Register from './components/Register.component';
 import Books from './components/Books.component';
 import Login from './components/Login.component';
 import BookForm from './components/BookForm.component';
+import EditBook from './components/EditBook.component';
 import Copyright from './components/Copyright.component';
 
 import './App.css';
@@ -29,6 +30,7 @@ class App extends Component {
               <Route exact path="/signin" component={Login} />
               <Route exact path="/signup" component={Register} />
               <Route exact path="/book" component={BookForm} />
+              <Route exact path="/book/:id" component={EditBook} />
           </Switch>
         </div>
         <Copyright /> 
