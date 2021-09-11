@@ -102,7 +102,7 @@ export default class EditBook extends Component {
             this.state.currentBook.title !== '' &&
             this.state.currentBook.author !== '' &&
             this.state.currentBook.pages !== null &&
-            this.state.currentBook.bookRead !== false
+            this.state.currentBook.bookRead !== null
         ) {
             BookService.edit(
                 this.state.id,
