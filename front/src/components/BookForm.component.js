@@ -29,10 +29,10 @@ export default class EditBook extends Component {
         this.handleEdit = this.handleEdit.bind(this);
         
         this.state = {
-            title: this.props.book ? this.props.book.title : '',
-            author: this.props.book ? this.props.book.author : '',
-            pages: this.props.book ? this.props.book.pages : '',
-            read: this.props.book ? this.props.book.bookRead : false,
+            title: '',
+            author: '',
+            pages: '',
+            read: false,
             successful: false,
             message: ''
         };
@@ -69,7 +69,7 @@ export default class EditBook extends Component {
             this.state.title !== '' &&
             this.state.author !== '' &&
             this.state.pages !== '' &&
-            this.state.read !== ''
+            this.state.read !== '' 
         ) {
             BookService.create(
                 this.state.title,
@@ -77,7 +77,6 @@ export default class EditBook extends Component {
                 this.state.pages,
                 this.state.read
             ).then(response => {
-                 console.log(response);
                  this.setState({
                     successful: true,
                     message: response.data.message
@@ -107,7 +106,7 @@ export default class EditBook extends Component {
                      successful: false,
                      message: err.response.status
                  });
-                
+
                  if (this.state.message === 403) {
                     store.addNotification({
                         title: `Error ${ this.state.message } Not token provided ...`,
@@ -153,7 +152,7 @@ export default class EditBook extends Component {
 
                  if (this.state.message.includes('successfuly')) {
                     store.addNotification({
-                        title: 'You\'re book added successfuly ✅',
+                        title: 'You\'re book modified successfuly ✅',
                         message: ' ',
                         type: 'success',
                         insert: 'top',
@@ -191,6 +190,21 @@ export default class EditBook extends Component {
                     });
                  }
 
+                 if (this.state.message === 404) {
+                    store.addNotification({
+                        title: `The value cannot be empty or same !`,
+                        message: ' ',
+                        type: 'danger',
+                        insert: 'top',
+                        container: 'top-full',
+                        animationIn: ['animate__animated', 'animate__jackInTheBox'],
+                        animationOut: ['animate__animated', 'animate__jackInTheBox'],
+                        dismiss: {
+                            duration: 2500
+                        }
+                    });
+                 }
+
                  setTimeout(() => {
                     window.location.href = '/books';
                  }, 1500);
@@ -206,19 +220,19 @@ export default class EditBook extends Component {
         return (
             <>
                <div className="form-title-container">
-                   <h3>{ this.props.book ? 'Edit a book' : 'Add a new book' }</h3>
+                   <h3>Add a new book</h3>
                </div>
                <div className="form-container">
                    <Form
                      className="form-book"
-                     onSubmit={ this.props.book ? this.handleEdit : this.handleSubmit }
+                     onSubmit={ this.handleSubmit }
                     >
                        <label htmlFor="title">Title</label>
                        <Input 
                          type="text"
                          name="title"
                          placeholder="Title of book"
-                         value={ this.props.book ? this.props.book.title : this.state.title }
+                         value={ this.state.title }
                          onChange={ this.onChangeTitle }
                          validations={[ required ]}
                        />
@@ -228,17 +242,17 @@ export default class EditBook extends Component {
                          type="text"
                          name="author"
                          placeholder="Author"
-                         value={ this.props.book ? this.props.book.author : this.state.author }
+                         value={ this.state.author }
                          onChange={ this.onChangeAuthor }
                          validations={[ required ]}
                        />
 
                        <label htmlFor="pages">Pages</label>
                        <Input 
-                         type="text"
+                         type="number"
                          name="pages"
                          placeholder="Number of pages"
-                         value={ this.props.book ? this.props.book.pages : this.state.pages}
+                         value={ this.state.pages}
                          onChange={ this.onChangePages }
                          validations={[ required ]}
                        />
@@ -247,7 +261,7 @@ export default class EditBook extends Component {
                        <Input 
                          type="checkbox"
                          name="read"
-                         checked={ this.props.book ? this.props.book.bookRead : this.state.read }
+                         checked={ this.state.read }
                          onChange={ this.onChangeRead }
                        />
 

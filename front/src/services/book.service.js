@@ -34,13 +34,10 @@ class BookService {
          });
     }
 
-    edit(id, title, author, pages, read) {
+    edit(id, book) {
         return axios
          .put(API_URL + 'book/' + id, {
-             title,
-             author,
-             pages,
-             read
+             book
          },
          { headers: AuthenticationHeaderService() }
          ).then(response => {
