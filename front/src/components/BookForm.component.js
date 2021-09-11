@@ -26,7 +26,6 @@ export default class EditBook extends Component {
         this.onChangePages = this.onChangePages.bind(this);
         this.onChangeRead = this.onChangeRead.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleEdit = this.handleEdit.bind(this);
         
         this.state = {
             title: '',
