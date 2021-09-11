@@ -61,19 +61,14 @@ exports.createBook = (req, res) => {
 exports.updateBook = (req, res) => {
     const id = req.params.id;
     const body = req.body;
+    body.book.bookRead = body.book.bookRead ? '1' : '0';
 
-    Book.update(body, {
+    Book.update(body.book, {
         where: {
             id: id
         }
     })
-     .then(book => {
-        if (book < 1) {
-            return res.status(404).send(error({
-                message: 'Cannot upadated book ❌ Verify this id. The value cannot be empty or same !'
-            }));
-        }
-
+     .then(() => {
         res.status(200).send({
             message: 'Book updated successfuly ✅ !'
         });
