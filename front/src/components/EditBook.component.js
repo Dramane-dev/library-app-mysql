@@ -123,6 +123,10 @@ export default class EditBook extends Component {
                         }
                     });
                  }
+
+                 setTimeout(() => {
+                    window.location.href = '/books';
+                 }, 1500);
              })
              .catch(err => {
                  this.setState({
