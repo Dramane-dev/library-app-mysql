@@ -17,7 +17,7 @@
     font-size: x-large;
 }
 
-input[type=text], input[type=number] {
+input[type=text], input[type=number], input[type=password] {
     width: 100%;
     padding: 12px;
     border: 1px solid antiquewhite;
@@ -72,4 +72,12 @@ input[type=text], input[type=number] {
     justify-content: center;
     color: #e74c3c;
     font-weight: bold;
+}
+
+.user-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100px;
+    border-radius: 5%;
 }

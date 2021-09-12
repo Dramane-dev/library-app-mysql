@@ -144,7 +144,7 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-container">
-                    <img src={ profileLogo } alt="profile-img" />
+                    <img className="user-logo" src={ profileLogo } alt="profile-img" />
                     <Form
                       ref={f => {
                         this.form = f
