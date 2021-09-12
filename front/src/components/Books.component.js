@@ -81,7 +81,7 @@ export default class Books extends Component {
             <>
                 {!connected ? (
                     <div id="not-logged" className="not-logged">
-                        <p>Could you loggin</p>
+                        <p>Could you log in</p>
                         <p>To have an access into the Library App</p>
                         <p>
                             <Link to={"/signin"}>

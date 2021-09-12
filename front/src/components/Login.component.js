@@ -9,6 +9,7 @@ import Books from './Books.component';
 import AuthenticationService from '../services/authentication.service';
 
 import '../css/form.css';
+import profileLogo from '../img/profile.png';
 
 const required = value => {
     if (!value) {
@@ -143,6 +144,7 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-container">
+                    <img src={ profileLogo } alt="profile-img" />
                     <Form
                       ref={f => {
                         this.form = f
@@ -162,7 +164,7 @@ export default class Register extends Component {
 
                         <label htmlFor="pages">Password</label>
                         <Input 
-                        type="text"
+                        type="password"
                         name="password"
                         placeholder="password"
                         value={this.state.password}
